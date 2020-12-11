@@ -1,5 +1,3 @@
-node {
-def mvnHome = tool name: 'maven-3', type: 'maven'
 pipeline {
     agent {
         docker {
@@ -10,15 +8,15 @@ pipeline {
     stages {
         stage('SCM Checkout') {
             steps {
-                sh 'git clone https://github.com/Kari-sad/maven.java-fundamentals'
+                sh 'git clone https://github.com/curriculeon-student/maven.java-fundamentals'
             }
         }
 
         stage('Compile-Package') {
             steps {
-                sh "echo ${mvnHome}/bin/mvn/package"
+                def mvnHome = tool name: 'maven-3', type: 'maven'
+                sh "${mvnHome}/bin/mvn/package"
             }
         }
     }
-}
 }
