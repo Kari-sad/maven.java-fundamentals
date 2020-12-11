@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'maven:3-alpine' 
-            args '-u root'
+            args '-v /root/.m2:/root/.m2' 
         }
     }
     stages {
@@ -16,21 +16,6 @@ pipeline {
             steps {
                 def mvnHome = tool name: 'maven-3', type: 'maven'
                 sh "${mvnHome}/bin/mvn/package"
-            }
-        }
-    }
-}
-
-pipeline {
-    agent {
-        docker { 
-			image 'node:14-alpine' 
-		}
-    }
-    stages {
-        stage('Test') {
-            steps {
-                sh 'node --version'
             }
         }
     }
