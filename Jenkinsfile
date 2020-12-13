@@ -1,10 +1,9 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3-alpine' 
-            args '-v /root/.m2:/root/.m2' 
-        }
-    }
+    agent any
+
+    tools {
+        maven "maven-3" // You need to add a maven with name "maven-3" in the Global Tools Configuration page
+    }    
     stages {
         stage('SCM Checkout') {
             steps {
