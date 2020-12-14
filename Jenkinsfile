@@ -1,13 +1,14 @@
 pipeline {
+    environment {
+        JAVA_TOOL_OPTIONS = "-Duser.home=/home/jenkins"
+    }
     agent {
         docker {
             image 'maven:3-alpine' 
             args '-v /root/.m2:/root/.m2' 
         }
     }
-    tools {
-    maven 'maven-3'
-  }	
+    	
     stages {
         stage('SCM Checkout') {
             steps {
