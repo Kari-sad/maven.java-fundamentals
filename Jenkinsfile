@@ -3,8 +3,7 @@ pipeline {
         JAVA_TOOL_OPTIONS = "-Duser.home=/home/jenkins"
     }
     agent {
-        docker {
-            image 'maven:3-alpine' 
+        dockerfile {
             args "-v /tmp/maven:/home/jenkins/.maven-3 -e MAVEN_CONFIG=/home/jenkins/.maven-3" 
         }
     }
