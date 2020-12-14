@@ -13,10 +13,13 @@ pipeline {
         }
 
         stage('Compile-Package') {
-            steps {
-                script{
-			def mvnHome = tool name: 'maven-3', type: 'maven'
-			sh "//${mvnHome}/bin/mvn/package"
+		environment {
+			HOME="."
+                }
+            	steps {
+                	script{
+				def mvnHome = tool name: 'maven-3', type: 'maven'
+				sh "${mvnHome}/bin/mvn/package"
 		}
             }
         }
