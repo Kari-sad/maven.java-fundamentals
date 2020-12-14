@@ -1,10 +1,11 @@
 pipeline {
-    environment {
-        JAVA_TOOL_OPTIONS = "-Duser.home=/home/jenkins"
+   environment {
+        PATH = "/opt/apache-maven-3.6.3/bin:$PATH"
     }
     agent {
-        dockerfile {
-            args "-v /tmp/maven:/home/jenkins/.maven-3 -e MAVEN_CONFIG=/home/jenkins/.maven-3" 
+        docker {
+            image 'maven:3-alpine' 
+            args '-v /root/.m2:/root/.m2' 
         }
     }
     	
