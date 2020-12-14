@@ -1,14 +1,10 @@
 pipeline {
-   environment {
-        PATH = "/opt/apache-maven-3.6.3/bin:$PATH"
-    }
     agent {
         docker {
             image 'maven:3-alpine' 
-            args '-v /root/.m2:/root/.m2' 
+            args '-u root' 
         }
     }
-    	
     stages {
         stage('SCM Checkout') {
             steps {
@@ -18,8 +14,10 @@ pipeline {
 
         stage('Compile-Package') {
 		   steps {
-                	sh "mvn package"
-		
+                	script{
+				def mvnHome = tool name: 'maven-3', type: 'maven'
+				sh "${mvnHome}/bin/mvn/package"
+		}
             }
         }
     }
